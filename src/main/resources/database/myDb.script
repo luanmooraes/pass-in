@@ -29,7 +29,7 @@ SET FILES NIO TRUE
 SET FILES NIO SIZE 256
 SET FILES LOG TRUE
 SET FILES LOG SIZE 50
-SET FILES CHECK 464
+SET FILES CHECK 752
 SET DATABASE COLLATION "SQL_TEXT" PAD SPACE
 CREATE USER SA PASSWORD DIGEST 'd41d8cd98f00b204e9800998ecf8427e'
 ALTER USER SA SET LOCAL TRUE
@@ -58,3 +58,5 @@ INSERT INTO "flyway_schema_history" VALUES(1,'1','create-table-events','SQL','V1
 INSERT INTO "flyway_schema_history" VALUES(2,'2','create-table-attendees','SQL','V2__create-table-attendees.sql',1612960147,'SA','2024-04-03 01:30:12.139260',262,'1')
 INSERT INTO "flyway_schema_history" VALUES(3,'3','create-table-checkins','SQL','V3__create-table-checkins.sql',277259538,'SA','2024-04-03 01:39:26.802708',198,'1')
 INSERT INTO "flyway_schema_history" VALUES(4,'4','create-indexes','SQL','V4__create-indexes.sql',553901455,'SA','2024-04-03 01:39:26.834773',7,'1')
+INSERT INTO EVENTS VALUES('2c92a534-c478-42f1-be7d-6e1b42ff7e5c','Estudar para o exame de Calculo','Revisar trigonometria','estudarparaoexamedecalculo',400)
+INSERT INTO EVENTS VALUES('6eda3e5a-7125-472f-93da-72ba83dc776e','Estudar para o exame de Calculo 2','Revisar trigonometria e \u00e1lgebra linear','estudarparaoexamedecalculo2',500)
