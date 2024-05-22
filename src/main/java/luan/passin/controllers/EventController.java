@@ -1,6 +1,8 @@
 package luan.passin.controllers;
 
 import lombok.RequiredArgsConstructor;
+import luan.passin.dto.attendee.AttendeeIdDTO;
+import luan.passin.dto.attendee.AttendeeRequestDTO;
 import luan.passin.dto.attendee.AttendeesListResponseDTO;
 import luan.passin.dto.event.EventIdDTO;
 import luan.passin.dto.event.EventRequestDTO;
@@ -26,8 +28,19 @@ public class EventController {
     @PostMapping
     public ResponseEntity<EventIdDTO> createEvent(@RequestBody EventRequestDTO body, UriComponentsBuilder uriComponentsBuilder){
         EventIdDTO eventIdDTO = this.eventService.createEvent(body);
+
         var uri = uriComponentsBuilder.path("/events/{id}").buildAndExpand(eventIdDTO.eventId()).toUri();
+
         return ResponseEntity.created(uri).body(eventIdDTO);
+    }
+
+    @PostMapping("/{eventId}/attendees")
+    public ResponseEntity<AttendeeIdDTO> registerParticipant(@PathVariable String eventId, @RequestBody AttendeeRequestDTO body, UriComponentsBuilder uriComponentsBuilder){
+        AttendeeIdDTO attendeeIdDTO = this.eventService.registerAttendeeOnEvent(eventId, body);
+
+        var uri = uriComponentsBuilder.path("/attendees/{attendeeId}/badge").buildAndExpand(attendeeIdDTO.attendeeId()).toUri();
+
+        return ResponseEntity.created(uri).body(attendeeIdDTO);
     }
 
     @GetMapping("/attendees/{id}")
@@ -35,5 +48,7 @@ public class EventController {
         AttendeesListResponseDTO attendeesListResponse = this.attendeeService.getEventsAttendee(id);
         return ResponseEntity.ok(attendeesListResponse);
     }
+
+
 }
 
